@@ -49,6 +49,7 @@ const BlogPage = () => {
                 <p className="text-gray-700 mb-4">{blog.subtitle}</p>
                 <div className="prose" dangerouslySetInnerHTML={{ __html: blog.body }} />
             </div>
+            1
         </div>
     );
 };
