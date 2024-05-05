@@ -11,7 +11,7 @@ function NavigationBar() {
 
   return (
     <nav className="navbar">
-      <h1>React App</h1>
+      <h1>BlogApp</h1>
       <button className="menu-btn" onClick={toggleMenu}>
         <div>
         <div className="bar1"></div>
