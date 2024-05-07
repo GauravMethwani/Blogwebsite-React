@@ -2,15 +2,14 @@ import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 import { db, collection, addDoc } from '../Firebaseconfig'; // Adjust the path to Firebaseconfig.js as needed
-import Modal from 'react-modal'; // Import React Modal
+import Message from '../Components/Message'; // Import React Modal
 
 const BlogPost = () => {
     const [title, setTitle] = useState('');
     const [subtitle, setSubtitle] = useState('');
     const [body, setBody] = useState('');
     // const [image, setImage] = useState(null); // State for image upload
-    const [showModal, setShowModal] = useState(false); // State for modal visibility
-   
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
   
       
 
@@ -28,7 +27,7 @@ const BlogPost = () => {
             setSubtitle('');
             setBody('');
             // Show modal after successful submission
-            setShowModal(true);
+            setShowSuccessModal(true)
         } catch (error) {
             console.error('Error adding blog post:', error);
         }
@@ -40,7 +39,10 @@ const BlogPost = () => {
     };
 
   
-
+    const close = () => {
+        setShowSuccessModal(false);
+       
+    };
     return (
         <div className="max-w-full mx-auto mt-8 p-6 bg-white shadow-md rounded-lg ">
             <h3 className="text-center text-lg font-semibold mb-4">
@@ -95,13 +97,11 @@ const BlogPost = () => {
                 </button>
             </form>
             {/* Modal */}
-            <Modal isOpen={showModal} onRequestClose={() => setShowModal(false)} className="modal">
-                <div className="modal-content">
-                    <h2 className="text-2xl font-bold mb-4">Submission Successful!</h2>
-                    <p>Your blog post has been added.</p>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4" onClick={() => setShowModal(false)}>Close</button>
-                </div>
-            </Modal>
+            <Message
+            isOpen={showSuccessModal}
+            message="Your account has been successfully Login."
+            onClose={close}
+        />
         </div>
     );
 };
