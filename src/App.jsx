@@ -7,9 +7,12 @@ import Footer from './Components/Footer';
 import BlogPage from './Pages/BlogPage';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
-
+import Message from './Components/Message';
+import { useNavigate } from 'react-router-dom';
 function App() {
+    let navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleLogin = () => {
         setIsLoggedIn(true);
@@ -17,8 +20,12 @@ function App() {
 
     const handleLogout = () => {
         setIsLoggedIn(false);
+        setShowSuccessModal(true)
     };
-
+    const closeModal = () => {
+      setShowSuccessModal(false);
+      navigate('/');
+  };
     return (
         <Router>
             <NavigationBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
@@ -30,6 +37,11 @@ function App() {
                 {!isLoggedIn && <Route path="/Login" element={<Login onLogin={handleLogin} />} />}
             </Routes>
             <Footer />
+            <Message
+            isOpen={showSuccessModal}
+            message="Your account Logout successfully"
+            onClose={closeModal}
+        />
         </Router>
     );
 }
