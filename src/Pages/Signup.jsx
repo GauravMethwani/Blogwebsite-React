@@ -17,7 +17,6 @@ const Signup = () => {
             setError('Password should be at least 6 characters long.');
             return;
         }
-        
         try {
             const methods = await fetchSignInMethodsForEmail(auth, email);
             if (methods && methods.length > 0) {
