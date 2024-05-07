@@ -17,7 +17,6 @@ const Login = ({ onLogin }) => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             setShowSuccessModal(true);
-            onLogin()
             setError(null);
         } catch (error) {
             // Handle specific error codes returned by Firebase
@@ -36,9 +35,10 @@ const Login = ({ onLogin }) => {
         }
     };
 
-    const closeModal = () => {
+    const close = () => {
         setShowSuccessModal(false);
         navigate('/');
+        onLogin();
     };
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-6 px-4 sm:px-6 lg:px-8">
@@ -75,7 +75,7 @@ const Login = ({ onLogin }) => {
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
                             <Link to="/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                Don't have an account? Sign up
+                                Dont have an account? Sign up
                             </Link>
                         </div>
                     </div>
@@ -93,7 +93,7 @@ const Login = ({ onLogin }) => {
             <Message
             isOpen={showSuccessModal}
             message="Your account has been successfully Login."
-            onClose={closeModal}
+            onClose={close}
         />
         </div>
     );
