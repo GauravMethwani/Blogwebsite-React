@@ -31,7 +31,7 @@ function App() {
             <Routes>
                 <Route path="/" exact element={<Home />} />
                 {isLoggedIn && <Route path="/BlogPost" exact element={<BlogPost />} />}
-                {isLoggedIn &&   <Route path="/BlogPage/:id" element={<BlogPage />} />}
+                 <Route path="/BlogPage/:id" element={<BlogPage />} />
                 {!isLoggedIn && <Route path="/Signup" element={<Signup />} />}
                 {!isLoggedIn && <Route path="/Login" element={<Login onLogin={handleLogin} />} />}
             </Routes>
