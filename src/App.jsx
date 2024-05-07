@@ -8,9 +8,9 @@ import BlogPage from './Pages/BlogPage';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Message from './Components/Message';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 function App() {
-    let navigate = useNavigate();
+   
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -24,7 +24,6 @@ function App() {
     };
     const closeModal = () => {
       setShowSuccessModal(false);
-      navigate('/');
   };
     return (
         <Router>
