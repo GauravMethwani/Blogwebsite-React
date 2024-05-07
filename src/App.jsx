@@ -1,8 +1,6 @@
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router components
- // Import the NumberCounter component
+import  { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './Components/NavigationBar';
-
 import BlogPost from './Pages/BlogPost';
 import Home from './Pages/Home';
 import Footer from './Components/Footer';
@@ -10,28 +8,30 @@ import BlogPage from './Pages/BlogPage';
 import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 
+function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+    };
 
- // Import the Navigation.css file for styling
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+    };
 
-function App() {   
- 
-
-  return (
-    <Router>
-      <NavigationBar/>
-        <Routes>
-        <Route path="/" exact element={<Home/>} />
-          <Route path="/BlogPost" exact element={<BlogPost/>} />
-          <Route path="/BlogPage/:id" element={<BlogPage/>} />
-          <Route path="/Signup" element={<Signup/>} />
-          <Route path="/Login" element={<Login/>} />
-        </Routes>
-        <Footer/>
-    </Router>
-  );
+    return (
+        <Router>
+            <NavigationBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+            <Routes>
+                <Route path="/" exact element={<Home />} />
+                {isLoggedIn && <Route path="/BlogPost" exact element={<BlogPost />} />}
+                {isLoggedIn &&   <Route path="/BlogPage/:id" element={<BlogPage />} />}
+                {!isLoggedIn && <Route path="/Signup" element={<Signup />} />}
+                {!isLoggedIn && <Route path="/Login" element={<Login onLogin={handleLogin} />} />}
+            </Routes>
+            <Footer />
+        </Router>
+    );
 }
 
-export default App;  
-
-
+export default App;
